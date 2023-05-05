@@ -1,0 +1,249 @@
+---
+#
+# The network connection profile provides client applications the information about the target
+# blockchain network that are necessary for the applications to interact with it. These are all
+# knowledge that must be acquired from out-of-band sources. This file provides such a source.
+#
+name: "network_pharma"
+
+x-type: "hlfv1"
+
+description: "Pharma Network"
+
+version: "1.0"
+
+client:
+  organization: distributor
+  connection:
+    timeout:
+      peer:
+        endorser: 300
+        eventHub: 300
+        eventReg: 300
+      orderer: 300
+
+channels:
+  pharmachannel:
+    orderers:
+      - orderer.pharmachannel.net
+    peers:
+      peer0.manufacturer.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer1.manufacturer.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.retailer.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer1.retailer.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.distributor.pharmachannel.net:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer1.distributor.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.transporter.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer1.transporter.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.consumer.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer1.consumer.pharmachannel.net:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+
+organizations:
+  manufacturer:
+    mspid: manufacturerMSP
+    peers:
+      - peer0.manufacturer.pharmachannel.net
+      - peer1.manufacturer.pharmachannel.net
+    certificateAuthorities:
+      - ca.manufacturer.pharmachannel.net
+  distributor:
+    mspid: distributorMSP
+    peers:
+      - peer0.distributor.pharmachannel.net
+      - peer1.distributor.pharmachannel.net
+    certificateAuthorities:
+      - ca.distributor.pharmachannel.net
+  retailer:
+    mspid: retailerMSP
+    peers:
+      - peer0.retailer.pharmachannel.net
+      - peer1.retailer.pharmachannel.net
+    certificateAuthorities:
+      - ca.retailer.pharmachannel.net
+  transporter:
+    mspid: transporterMSP
+    peers:
+      - peer0.transporter.pharmachannel.net
+      - peer1.transporter.pharmachannel.net
+    certificateAuthorities:
+      - ca.transporter.pharmachannel.net
+  consumer:
+    mspid: consumerMSP
+    peers:
+      - peer0.consumer.pharmachannel.net
+      - peer1.consumer.pharmachannel.net
+    certificateAuthorities:
+      - ca.consumer.pharmachannel.net
+
+orderers:
+  orderer.pharmachannel.net:
+    url: grpc://localhost:7050
+    grpcOptions:
+      ssl-target-name-override: orderer.pharmachannel.net
+    tlsCACerts:
+      path: ../network/organizations/ordererOrganizations/pharmachannel.net/orderers/orderer.pharmachannel.net/msp/tlscacerts/tlsca.pharmachannel.net-cert.pem
+
+peers:
+  peer0.manufacturer.pharmachannel.net:
+    url: grpc://localhost:7051
+    grpcOptions:
+      ssl-target-name-override: peer0.manufacturer.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/manufacturer.pharmachannel.net/peers/peer0.manufacturer.pharmachannel.net/msp/tlscacerts/tlsca.manufacturer.pharmachannel.net-cert.pem
+  peer1.manufacturer.pharmachannel.net:
+    url: grpc://localhost:8051
+    grpcOptions:
+      ssl-target-name-override: peer1.manufacturer.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/manufacturer.pharmachannel.net/peers/peer1.manufacturer.pharmachannel.net/msp/tlscacerts/tlsca.manufacturer.pharmachannel.net-cert.pem
+  peer0.distributor.pharmachannel.net:
+    url: grpc://localhost:9051
+    grpcOptions:
+      ssl-target-name-override: peer0.distributor.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/distributor.pharmachannel.net/peers/peer0.distributor.pharmachannel.net/msp/tlscacerts/tlsca.distributor.pharmachannel.net-cert.pem
+  peer1.distributor.pharmachannel.net:
+    url: grpc://localhost:10051
+    grpcOptions:
+      ssl-target-name-override: peer1.distributor.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/distributor.pharmachannel.net/peers/peer1.distributor.pharmachannel.net/msp/tlscacerts/tlsca.distributor.pharmachannel.net-cert.pem
+  peer0.retailer.pharmachannel.net:
+    url: grpc://localhost:11051
+    grpcOptions:
+      ssl-target-name-override: peer0.retailer.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/retailer.pharmachannel.net/peers/peer0.retailer.pharmachannel.net/msp/tlscacerts/tlsca.retailer.pharmachannel.net-cert.pem
+  peer1.retailer.pharmachannel.net:
+    url: grpc://localhost:12051
+    grpcOptions:
+      ssl-target-name-override: peer1.retailer.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/retailer.pharmachannel.net/peers/peer1.retailer.pharmachannel.net/msp/tlscacerts/tlsca.retailer.pharmachannel.net-cert.pem
+  peer0.transporter.pharmachannel.net:
+    url: grpc://localhost:13051
+    grpcOptions:
+      ssl-target-name-override: peer0.transporter.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/transporter.pharmachannel.net/peers/peer0.transporter.pharmachannel.net/msp/tlscacerts/tlsca.transporter.pharmachannel.net-cert.pem
+  peer1.transporter.pharmachannel.net:
+    url: grpc://localhost:14051
+    grpcOptions:
+      ssl-target-name-override: peer1.transporter.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/transporter.pharmachannel.net/peers/peer1.transporter.pharmachannel.net/msp/tlscacerts/tlsca.transporter.pharmachannel.net-cert.pem
+  peer0.consumer.pharmachannel.net:
+    url: grpc://localhost:15051
+    grpcOptions:
+      ssl-target-name-override: peer0.consumer.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/consumer.pharmachannel.net/peers/peer0.consumer.pharmachannel.net/msp/tlscacerts/tlsca.consumer.pharmachannel.net-cert.pem
+  peer1.consumer.pharmachannel.net:
+    url: grpc://localhost:16051
+    grpcOptions:
+      ssl-target-name-override: peer1.consumer.pharmachannel.net
+      request-timeout: 120001
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/consumer.pharmachannel.net/peers/peer1.consumer.pharmachannel.net/msp/tlscacerts/tlsca.consumer.pharmachannel.net-cert.pem
+
+
+certificateAuthorities:
+  ca.consumer.pharmachannel.net:
+    url: http://localhost:11054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/consumer.pharmachannel.net/ca/ca.consumer.pharmachannel.net-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.consumer.pharmachannel.net
+  ca.manufacturer.pharmachannel.net:
+    url: http://localhost:7054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/manufacturer.pharmachannel.net/ca/ca.manufacturer.pharmachannel.net-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.manufacturer.pharmachannel.net
+  ca.retailer.pharmachannel.net:
+    url: http://localhost:9054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/retailer.pharmachannel.net/ca/ca.retailer.pharmachannel.net-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.retailer.pharmachannel.net
+  ca.distributor.pharmachannel.net:
+    url: http://localhost:8054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/distributor.pharmachannel.net/ca/ca.distributor.pharmachannel.net-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.distributor.pharmachannel.net
+  ca.transporter.pharmachannel.net:
+    url: http://localhost:10054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: ../network/organizations/peerOrganizations/transporter.pharmachannel.net/ca/ca.transporter.pharmachannel.net-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.transporter.pharmachannel.net

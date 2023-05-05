@@ -1,0 +1,10 @@
+PeerOrgs:
+  - Name: retailer
+    Domain: retailer.pharmachannel.net
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - localhost
+    Users:
+      Count: 1

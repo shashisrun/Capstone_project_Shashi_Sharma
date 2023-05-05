@@ -1,0 +1,10 @@
+PeerOrgs:
+  - Name: transporter
+    Domain: transporter.pharmachannel.net
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - localhost
+    Users:
+      Count: 1

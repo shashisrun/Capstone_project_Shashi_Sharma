@@ -1,0 +1,8 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: pharmachannel.net
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: orderer
+        SANS:
+          - localhost
